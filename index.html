@@ -1,370 +1,365 @@
 <!DOCTYPE html>
-<html lang="ar">
-	<style>
-    /* ألوان وخلفية عامة */
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: linear-gradient(135deg, #eef2ff, #e0f2fe) !important; /* خلفية ناعمة */
-        color: #111827 !important;
-    }
-
-    /* نخلي كل البلوكات الأساسية شكلها كرت أبيض ناعم */
-    .card, .box, .container, form, .section {
-        background-color: #ffffff !important;
-        border-radius: 18px !important;
-        box-shadow: 0 18px 35px rgba(15, 23, 42, 0.10) !important;
-        border: none !important;
-    }
-
-    /* العناوين */
-    h1, h2, h3 {
-        color: #0f172a !important;
-        text-align: center;
-    }
-
-    /* الأزرار */
-    button,
-    input[type="button"],
-    input[type="submit"],
-    .btn {
-        background-color: #2563eb !important;   /* أزرق جميل */
-        color: #ffffff !important;
-        border: none !important;
-        border-radius: 999px !important;
-        padding: 10px 24px !important;
-        font-weight: 600 !important;
-        cursor: pointer !important;
-        transition: 0.2s ease !important;
-    }
-
-    button:hover,
-    input[type="button"]:hover,
-    input[type="submit"]:hover,
-    .btn:hover {
-        background-color: #1d4ed8 !important;
-        transform: translateY(-1px);
-    }
-
-    /* الحقول (إدخال النص، البحث، …) */
-    input[type="text"],
-    input[type="search"],
-    textarea,
-    select {
-        border-radius: 10px !important;
-        border: 1px solid #d1d5db !important;
-        padding: 10px 12px !important;
-        font-size: 14px !important;
-        box-sizing: border-box !important;
-    }
-
-    /* سطر صغير في أسفل الصفحة */
-    .footer,
-    .copyright,
-    .note {
-        text-align: center;
-        margin-top: 16px;
-        font-size: 13px;
-        color: #6b7280 !important;
-    }
-</style>
+<html lang="ar" dir="rtl">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>مترجم لغة الإشارة الذكي</title>
-	<link rel="stylesheet" href="../style.css">
-	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مترجم لغة الإشارة الذكي</title>
+
+    <!-- خط جميل -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* الخط والخلفية العامة */
+        body {
+            font-family: 'Cairo', 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #2196f3 0%, #e3f2fd 100%);
+            margin: 0;
+            padding: 0;
+            color: #222;
+        }
+
+        @keyframes bgmove {
+            0%   { background-position: 0 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        /* الهيدر */
+        header {
+            background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%);
+            color: #fff;
+            padding: 2.8rem 1rem 1.8rem 1rem;
+            text-align: center;
+            border-bottom-left-radius: 32px;
+            border-bottom-right-radius: 32px;
+            box-shadow: 0 8px 32px rgba(33,150,243,0.13);
+            letter-spacing: 1.5px;
+        }
+
+        header h1 {
+            margin: 0 0 0.4rem 0;
+            font-size: 1.6rem;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* البادجات للأسماء */
+        .authors {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .authors span {
+            background: #37474f;
+            color: #fff;
+            border-radius: 32px;
+            padding: 0.3rem 1.2rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 2px 8px #0002;
+        }
+
+        /* الكروت (الأقسام) */
+        section.combine,
+        section.library,
+        section.upload {
+            background: #fff;
+            margin: 2.5rem auto;
+            padding: 2.2rem 2rem;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(33,150,243,0.10);
+            max-width: 600px;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        section.combine:hover,
+        section.library:hover,
+        section.upload:hover {
+            box-shadow: 0 12px 32px rgba(33,150,243,0.18);
+        }
+
+        section h2 {
+            margin-top: 0;
+            margin-bottom: 0.6rem;
+            font-size: 1.3rem;
+            color: #1565c0;
+        }
+
+        section p {
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        /* صندوق الإشارات */
+        .box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            color: #1976d2;
+            border-radius: 16px;
+            padding: 1.2rem 2rem;
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 24px rgba(33,150,243,0.10);
+        }
+
+        .box:hover {
+            background: linear-gradient(135deg, #bbdefb 0%, #e3f2fd 100%);
+            color: #1565c0;
+            box-shadow: 0 12px 32px rgba(33,150,243,0.18);
+            transform: scale(1.03);
+        }
+
+        /* الحقول (نص/بحث/رمز) */
+        input[type="text"],
+        input[type="search"] {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 12px;
+            border: 1.5px solid #64b5f6;
+            margin-top: 0.7rem;
+            font-size: 1.05rem;
+            background: #e3f2fd;
+            color: #1976d2;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus,
+        input[type="search"]:focus {
+            border: 1.5px solid #43cea2;
+            outline: none;
+        }
+
+        /* حقل رفع الملف */
+        input[type="file"] {
+            width: 100%;
+            padding: 0.7rem;
+            border-radius: 10px;
+            border: 1px solid #a5d6a7;
+            margin-top: 0.7rem;
+            font-size: 1rem;
+            background: #d0f5d8;
+            color: #388e3c;
+        }
+
+        input[type="file"]:focus {
+            border: 1.5px solid #43cea2;
+            outline: none;
+        }
+
+        /* الأزرار */
+        button,
+        input[type="button"],
+        input[type="submit"] {
+            background: linear-gradient(180deg, #2196f3 0%, #1565c0 60%, #0d47a1 100%);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            padding: 0.9rem 2rem;
+            margin: 0.4rem 0.3rem;
+            font-size: 1.02rem;
+            box-shadow: 0 6px 18px 0 rgba(21,101,192,0.25), 0 1.5px 0 #fff inset;
+            text-shadow: 0 2px 6px #1565c099, 0 1px 0 #fff;
+            letter-spacing: 1.1px;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+        }
+
+        button:hover,
+        input[type="button"]:hover,
+        input[type="submit"]:hover {
+            background: linear-gradient(180deg, #42a5f5 0%, #1565c0 80%, #0d47a1 100%);
+            box-shadow: 0 12px 32px 0 rgba(21,101,192,0.35), 0 2px 0 #fff inset;
+            transform: translateY(-4px) scale(1.03);
+        }
+
+        /* صور الإشارات */
+        #imagesResult img,
+        #imagesLibrary img,
+        #imagesList img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            object-fit: cover;
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            padding: 1.2rem;
+            color: #1976d2;
+            font-size: 1.05rem;
+            margin-top: 2.5rem;
+            background: linear-gradient(90deg, #e3f2fd 0%, #bbdefb 100%);
+            border-top: 2.5px solid #64b5f6;
+            letter-spacing: 1.2px;
+            box-shadow: 0 -4px 24px rgba(33,150,243,0.10);
+        }
+
+        /* استجابة للجوال */
+        @media (max-width: 600px) {
+            header {
+                padding: 1.5rem 0.5rem 1rem 0.5rem;
+                border-bottom-left-radius: 18px;
+                border-bottom-right-radius: 18px;
+            }
+            h1 {
+                font-size: 1.2rem;
+            }
+            section.combine,
+            section.library,
+            section.upload {
+                padding: 1rem 0.7rem;
+                border-radius: 14px;
+                max-width: 95vw;
+            }
+            input[type="text"],
+            input[type="search"],
+            input[type="file"] {
+                font-size: 0.95rem;
+                padding: 0.5rem;
+            }
+            button {
+                font-size: 0.95rem;
+                padding: 0.6rem 1.2rem;
+            }
+            #imagesResult img,
+            #imagesLibrary img,
+            #imagesList img {
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-	<header>
-		<h1>مترجم لغة الإشارة العربي الذكي</h1>
-		<p>ترجمة ذكية وسريعة</p>
-		<div style="display:flex; gap:1.2rem; justify-content:center; margin-top:1rem;">
-		  <span style="background:#37474f; color:#fff; border-radius:32px; padding:0.3rem 1.2rem; font-size:1rem; display:flex; align-items:center; gap:0.5rem; box-shadow:0 2px 8px #0002; font-family:'Cairo', 'Roboto', Arial, sans-serif;">
-		    حصة الشطي <span style="font-size:1.1rem;">👩🏻‍💻</span>
-		  </span>
-		  <span style="background:#37474f; color:#fff; border-radius:32px; padding:0.3rem 1.2rem; font-size:1rem; display:flex; align-items:center; gap:0.5rem; box-shadow:0 2px 8px #0002; font-family:'Cairo', 'Roboto', Arial, sans-serif;">
-		    خديجة العجمي <span style="font-size:1.1rem;">👩🏻‍💻</span>
-		  </span>
-		</div>
+    <header>
+        <h1>مترجم لغة الإشارة العربي الذكي</h1>
+        <p>ترجمة ذكية وسريعة</p>
 
-		<!-- تم حذف الأزرار بناءً على طلب المستخدم -->
-	</header>
+        <div class="authors">
+            <span>حصة الشطي 👩🏻‍💻</span>
+            <span>خديجة العجمي 👩🏻‍💻</span>
+        </div>
+    </header>
 
-	<section class="combine">
-		<h2>جمع الإشارات لتكوين كلمة بالصور</h2>
-		<p>اكتب الرموز مفصولة ب + (مثال: رمز1+رمز2+رمز3)</p>
-		<input type="text" id="lettersInput" placeholder="اكتب الرموز هنا">
-		<button onclick="combineImages()">تكوين الكلمة</button>
-		<div id="imagesResult" style="margin-top:1.5rem; display:flex; gap:0.5rem; flex-wrap:wrap;"></div>
-	</section>
+    <section class="combine">
+        <h2>جمع الإشارات لتكوين كلمة بالصور</h2>
+        <p>اكتب الرموز مفصولة ب + (مثال: رمز1+رمز2+رمز3)</p>
 
-	<section class="library">
-		<h2>📚 مكتبة صور الإشارات</h2>
-		<input type="text" id="searchInput" placeholder="ابحث عن رمز..." style="width:100%; padding:0.7rem; border-radius:10px; border:1px solid #ddd; margin-top:0.7rem; font-size:1rem;">
-		<div id="imagesLibrary" style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:1rem;"></div>
-	</section>
-	<section class="upload" style="background:#fff; margin:2rem auto; padding:1.5rem 1.2rem; border-radius:20px; box-shadow:0 2px 12px rgba(106,130,251,0.07); max-width:500px;">
-		<h2>رفع وربط صورة الإشارة</h2>
-		<form id="uploadForm" onsubmit="saveImage(event)" style="display:flex; flex-direction:column; gap:1rem;">
-			<input type="file" id="imageInput" accept="image/*" required>
-			<input type="text" id="symbolInput" placeholder="اكتب الرمز" required style="padding:0.7rem; border-radius:10px; border:1px solid #ddd; font-size:1rem;">
-			<button type="submit" style="padding:0.7rem 1.5rem; border-radius:20px; background:#6a82fb; color:#fff; border:none; cursor:pointer;">حفظ</button>
-		</form>
-		<div id="imagesList" style="margin-top:1.5rem;"></div>
-	</section>
-	</section>
+        <input type="text" id="lettersInput" placeholder="اكتب الرموز هنا">
+        <button onclick="combineImages()">تكوين الكلمة</button>
 
-	<footer>
-		<p>إعداد خديجة العجمي وحصة الشطي | 2025 ©</p>
-		<script>
-		// رفع وربط صورة الإشارة
-		let savedImages = [];
-		function saveImage(e) {
-			e.preventDefault();
-			const fileInput = document.getElementById('imageInput');
-			const symbolInput = document.getElementById('symbolInput');
-			const file = fileInput.files[0];
-			const symbol = symbolInput.value.trim();
-			if (!file || !symbol) return;
-			const reader = new FileReader();
-			reader.onload = function(ev) {
-				savedImages.push({ symbol, src: ev.target.result });
-				renderImagesLibrary();
-				fileInput.value = '';
-				symbolInput.value = '';
-			};
-			reader.readAsDataURL(file);
-		}
-		function renderImagesLibrary(filter = "") {
-			const list = document.getElementById('imagesLibrary');
-			list.innerHTML = '';
-			savedImages.filter(img => img.symbol.includes(filter)).forEach(img => {
-				const div = document.createElement('div');
-				div.className = 'box';
-				div.style = 'padding:0;display:flex;flex-direction:column;align-items:center;';
-				div.innerHTML = `<img src="${img.src}" alt="${img.symbol}" style="width:60px;height:60px;border-radius:10px;border:1px solid #ddd;object-fit:cover;"> <span style="font-size:1.1rem;color:#fff;display:block;">${img.symbol}</span>`;
-				list.appendChild(div);
-			});
-		}
-		document.getElementById('searchInput').addEventListener('input', function(e) {
-			renderImagesLibrary(e.target.value);
-		});
-		renderImagesLibrary();
+        <div id="imagesResult" style="margin-top:1.5rem; display:flex; gap:0.5rem; flex-wrap:wrap;"></div>
+    </section>
 
-		// تكوين الكلمة من الصور
-		function combineImages() {
-			var input = document.getElementById('lettersInput').value;
-			var symbols = input.split('+').map(l => l.trim()).filter(l => l);
-			var resultDiv = document.getElementById('imagesResult');
-			resultDiv.innerHTML = '';
-			symbols.forEach(symbol => {
-				var imgObj = savedImages.find(img => img.symbol === symbol);
-				if (imgObj) {
-					var img = document.createElement('img');
-					img.src = imgObj.src;
-					img.alt = symbol;
-					img.style = 'width:60px;height:60px;border-radius:10px;border:1px solid #ddd;object-fit:cover;';
-					resultDiv.appendChild(img);
-				}
-			});
-		}
-		// عرض الصور المحفوظة أسفل نموذج الرفع
-		function renderImages() {
-			const list = document.getElementById('imagesList');
-			list.innerHTML = '';
-			savedImages.forEach(img => {
-				const div = document.createElement('div');
-				div.style = 'display:flex;align-items:center;gap:1rem;margin-bottom:1rem;';
-				div.innerHTML = `<img src="${img.src}" alt="${img.symbol}" style="width:60px;height:60px;border-radius:10px;border:1px solid #ddd;object-fit:cover;"> <span style="font-size:1.1rem;color:#6a82fb;">${img.symbol}</span>`;
-				list.appendChild(div);
-			});
-		}
-		</script>
-		<script>
-		// مكتبة الإشارات
-		let allLetters = ["أ", "ب", "ت", "ث", "ج"];
-		function renderLetters(filter = "") {
-			const list = document.getElementById('lettersList');
-			list.innerHTML = "";
-			allLetters.filter(l => l.includes(filter)).forEach(letter => {
-				const box = document.createElement('div');
-				box.className = 'box';
-				box.textContent = letter;
-				box.title = 'اضغط لسماع الإشارة';
-				box.onclick = function() { alert('سماع الإشارة: ' + letter); };
-				list.appendChild(box);
-			});
-		}
-		document.getElementById('searchInput').addEventListener('input', function(e) {
-			renderLetters(e.target.value);
-		});
-		renderLetters();
+    <section class="library">
+        <h2>📚 مكتبة صور الإشارات</h2>
+        <input type="text" id="searchInput" placeholder="ابحث عن رمز...">
+        <div id="imagesLibrary" style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:1rem;"></div>
+    </section>
 
-		// تكوين الكلمة
-		function combineLetters() {
-			var input = document.getElementById('lettersInput').value;
-			var letters = input.split('+').map(l => l.trim()).filter(l => l);
-			var result = letters.join('');
-			document.getElementById('result').innerText = result ? 'الكلمة الناتجة: ' + result : '';
-		}
-		</script>
-	</footer>
+    <section class="upload">
+        <h2>رفع وربط صورة الإشارة</h2>
 
+        <form id="uploadForm" onsubmit="saveImage(event)" style="display:flex; flex-direction:column; gap:1rem;">
+            <input type="file" id="imageInput" accept="image/*" required>
+            <input type="text" id="symbolInput" placeholder="اكتب الرمز" required>
+            <button type="submit">حفظ</button>
+        </form>
+
+        <div id="imagesList" style="margin-top:1.5rem;"></div>
+    </section>
+
+    <footer>
+        <p>إعداد خديجة العجمي وحصة الشطي | 2025 ©</p>
+    </footer>
+
+    <!-- الجافاسكربت (نفس الكود حقك بدون تغيير في الوظائف) -->
+    <script>
+        // رفع وربط صورة الإشارة
+        let savedImages = [];
+
+        function saveImage(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('imageInput');
+            const symbolInput = document.getElementById('symbolInput');
+            const file = fileInput.files[0];
+            const symbol = symbolInput.value.trim();
+            if (!file || !symbol) return;
+
+            const reader = new FileReader();
+            reader.onload = function (ev) {
+                savedImages.push({ symbol, src: ev.target.result });
+                renderImagesLibrary();
+                renderImages();
+                fileInput.value = '';
+                symbolInput.value = '';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function renderImagesLibrary(filter = "") {
+            const list = document.getElementById('imagesLibrary');
+            list.innerHTML = '';
+            savedImages
+                .filter(img => img.symbol.includes(filter))
+                .forEach(img => {
+                    const div = document.createElement('div');
+                    div.className = 'box';
+                    div.style = 'padding:0;display:flex;flex-direction:column;align-items:center;';
+                    div.innerHTML =
+                        `<img src="${img.src}" alt="${img.symbol}">
+                         <span style="font-size:1.1rem;color:#1565c0;display:block;margin-top:0.3rem;">${img.symbol}</span>`;
+                    list.appendChild(div);
+                });
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function (e) {
+            renderImagesLibrary(e.target.value);
+        });
+
+        // تكوين الكلمة من الصور
+        function combineImages() {
+            const input = document.getElementById('lettersInput').value;
+            const symbols = input.split('+').map(l => l.trim()).filter(l => l);
+            const resultDiv = document.getElementById('imagesResult');
+            resultDiv.innerHTML = '';
+
+            symbols.forEach(symbol => {
+                const imgObj = savedImages.find(img => img.symbol === symbol);
+                if (imgObj) {
+                    const img = document.createElement('img');
+                    img.src = imgObj.src;
+                    img.alt = symbol;
+                    resultDiv.appendChild(img);
+                }
+            });
+        }
+
+        // عرض الصور المحفوظة أسفل نموذج الرفع
+        function renderImages() {
+            const list = document.getElementById('imagesList');
+            list.innerHTML = '';
+            savedImages.forEach(img => {
+                const div = document.createElement('div');
+                div.style = 'display:flex;align-items:center;gap:1rem;margin-bottom:1rem;';
+                div.innerHTML =
+                    `<img src="${img.src}" alt="${img.symbol}">
+                     <span style="font-size:1.1rem;color:#6a82fb;">${img.symbol}</span>`;
+                list.appendChild(div);
+            });
+        }
+    </script>
 </body>
 </html>
-	width: 100%;
-	padding: 0.7rem;
-	border-radius: 10px;
-	border: 1px solid #a5d6a7;
-	margin-top: 0.7rem;
-	font-size: 1rem;
-	background: #d0f5d8;
-	color: #388e3c;
-}
-input[type="file"]:focus {
-	border: 1.5px solid #43cea2;
-}
-
-body {
-	font-family: 'Cairo', 'Roboto', Arial, sans-serif;
-	background: linear-gradient(135deg, #2196f3 0%, #e3f2fd 100%);
-	margin: 0;
-	padding: 0;
-	color: #222;
-	}
-	@keyframes bgmove {
-		0% { background-position: 0 0; }
-		100% { background-position: 1000px 0; }
-}
-header {
-	background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%);
-	color: #fff;
-	padding: 2.8rem 1rem 1.8rem 1rem;
-	text-align: center;
-	border-bottom-left-radius: 32px;
-	border-bottom-right-radius: 32px;
-	box-shadow: 0 8px 32px rgba(33,150,243,0.13);
-	font-family: 'Cairo', 'Roboto', Arial, sans-serif;
-	letter-spacing: 1.5px;
-	transform: none;
-}
-section.combine, section.library {
-	background: #fff;
-	margin: 2.5rem auto;
-	padding: 2.2rem 2rem;
-	border-radius: 24px;
-	box-shadow: 0 8px 32px rgba(33,150,243,0.10);
-	max-width: 600px;
-	transition: box-shadow 0.2s, transform 0.2s;
-	transform: none;
-}
-section.combine:hover, section.library:hover {
-	box-shadow: 0 12px 32px rgba(33,150,243,0.18);
-}
-.box {
-	background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-	color: #1976d2;
-	border-radius: 16px;
-	padding: 1.2rem 2rem;
-	font-size: 1.15rem;
-	margin-bottom: 1rem;
-	box-shadow: 0 4px 24px rgba(33,150,243,0.10);
-	font-family: 'Cairo', 'Roboto', Arial, sans-serif;
-	transform: none;
-}
-.box:hover {
-	background: linear-gradient(135deg, #bbdefb 0%, #e3f2fd 100%);
-	color: #1565c0;
-	box-shadow: 0 12px 32px rgba(33,150,243,0.18);
-	transform: scale(1.04);
-}
-input[type="text"] {
-	width: 100%;
-	padding: 0.8rem;
-	border-radius: 12px;
-	border: 1.5px solid #64b5f6;
-	margin-top: 0.7rem;
-	font-size: 1.05rem;
-	background: #e3f2fd;
-	color: #1976d2;
-	font-family: 'Cairo', 'Roboto', Arial, sans-serif;
-}
-input[type="text"]:focus {
-	border: 1.5px solid #43cea2;
-}
-button {
-	background: linear-gradient(180deg, #2196f3 0%, #1565c0 60%, #0d47a1 100%);
-	color: #fff;
-	border: none;
-	border-radius: 14px;
-	padding: 0.9rem 2rem;
-	margin: 0 0.7rem;
-	font-size: 1.08rem;
-	font-family: 'Cairo', 'Roboto', Arial, sans-serif;
-	box-shadow: 0 6px 18px 0 rgba(21,101,192,0.25), 0 1.5px 0 #fff inset;
-	text-shadow: 0 2px 6px #1565c099, 0 1px 0 #fff;
-	letter-spacing: 1.2px;
-	transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
-	position: relative;
-	top: 0;
-}
-button:hover {
-	background: linear-gradient(180deg, #42a5f5 0%, #1565c0 80%, #0d47a1 100%);
-	color: #fff;
-	box-shadow: 0 12px 32px 0 rgba(21,101,192,0.35), 0 2px 0 #fff inset;
-	transform: translateY(-4px) scale(1.08);
-}
-footer {
-	text-align: center;
-	padding: 1.2rem;
-	color: #1976d2;
-	font-size: 1.05rem;
-	margin-top: 2.5rem;
-	background: linear-gradient(90deg, #e3f2fd 0%, #bbdefb 100%);
-	border-top: 2.5px solid #64b5f6;
-	font-family: 'Cairo', 'Roboto', Arial, sans-serif;
-	letter-spacing: 1.2px;
-	box-shadow: 0 -4px 24px rgba(33,150,243,0.10);
-}
-@media (max-width: 600px) {
-  header {
-    padding: 1.5rem 0.5rem 1rem 0.5rem;
-    border-bottom-left-radius: 18px;
-    border-bottom-right-radius: 18px;
-    font-size: 1rem;
-  }
-  h1 {
-    font-size: 1.2rem;
-  }
-  .combine, .library, .upload {
-    padding: 1rem 0.5rem;
-    border-radius: 12px;
-    max-width: 98vw;
-    font-size: 0.95rem;
-  }
-  input[type="text"], input[type="file"] {
-    font-size: 0.95rem;
-    padding: 0.5rem;
-  }
-  button, .box, .upload button {
-    font-size: 0.95rem;
-    padding: 0.5rem 1rem;
-    border-radius: 12px;
-  }
-  .box img, #imagesResult img, #imagesLibrary img {
-    width: 40px !important;
-    height: 40px !important;
-  }
-  footer {
-    font-size: 0.9rem;
-    padding: 0.7rem;
-  }
-  .header-decor span {
-    font-size: 0.9rem !important;
-    padding: 0.2rem 0.7rem !important;
-  }
-}
-
