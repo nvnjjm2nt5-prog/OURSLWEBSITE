@@ -285,30 +285,39 @@
         <p>إعداد خديجة العجمي وحصة الشطي | 2025 ©</p>
     </footer>
 
-    <!-- الجافاسكربت (نفس الكود حقك بدون تغيير في الوظائف) -->
+    <!-- الجافاسكربت مع الحفظ في المتصفح -->
     <script>
-        // رفع وربط صورة الإشارة
-        let savedImages = [];
+        // نحاول تحميل الصور المحفوظة من المتصفح (localStorage)
+        let savedImages = JSON.parse(localStorage.getItem('savedImages') || '[]');
 
+        // حفظ وربط صورة الإشارة
         function saveImage(e) {
             e.preventDefault();
-            const fileInput = document.getElementById('imageInput');
+            const fileInput   = document.getElementById('imageInput');
             const symbolInput = document.getElementById('symbolInput');
-            const file = fileInput.files[0];
+            const file   = fileInput.files[0];
             const symbol = symbolInput.value.trim();
             if (!file || !symbol) return;
 
             const reader = new FileReader();
             reader.onload = function (ev) {
+                // نضيف الصورة للمصفوفة
                 savedImages.push({ symbol, src: ev.target.result });
+
+                // نحفظها في المتصفح
+                localStorage.setItem('savedImages', JSON.stringify(savedImages));
+
+                // نحدّث العرض
                 renderImagesLibrary();
                 renderImages();
+
                 fileInput.value = '';
                 symbolInput.value = '';
             };
             reader.readAsDataURL(file);
         }
 
+        // عرض مكتبة الصور (فلتر حسب البحث)
         function renderImagesLibrary(filter = "") {
             const list = document.getElementById('imagesLibrary');
             list.innerHTML = '';
@@ -325,13 +334,14 @@
                 });
         }
 
+        // البحث في المكتبة
         document.getElementById('searchInput').addEventListener('input', function (e) {
             renderImagesLibrary(e.target.value);
         });
 
-        // تكوين الكلمة من الصور
+        // تكوين الكلمة من الرموز (بالصور)
         function combineImages() {
-            const input = document.getElementById('lettersInput').value;
+            const input   = document.getElementById('lettersInput').value;
             const symbols = input.split('+').map(l => l.trim()).filter(l => l);
             const resultDiv = document.getElementById('imagesResult');
             resultDiv.innerHTML = '';
@@ -360,6 +370,10 @@
                 list.appendChild(div);
             });
         }
+
+        // أول ما تفتح الصفحة: نعرض أي إشارات محفوظة من قبل
+        renderImagesLibrary();
+        renderImages();
     </script>
 </body>
 </html>
